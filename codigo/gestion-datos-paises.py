@@ -64,7 +64,7 @@ def programa_principal():
     def ExisteArchivo(archivo):
         return os.path.isfile(archivo)
     
-    def ElegirContinente():
+    def PedirContinente():
         continentes = [ "1. Asia",
                     "2. Africa",
                     "3. America del Norte",
@@ -75,7 +75,7 @@ def programa_principal():
         while True:
         # Mostramos las opciones del menu al usuario
             print("\n"+"="*54)
-            print("Elija el continente del pais ingresado") 
+            print("Continentes:") 
             print("="*54)
             for opcion in continentes:
                 print(opcion)
@@ -110,14 +110,12 @@ def programa_principal():
                     print("⚠️  Opción inválida. Por favor, elija una opción del 1 al 7.\n")
                     continue    
         return continente   
-# ! ########################################
-# TODO: Verificar la validacion de nombre
-# ! ########################################
+    
     # Defino metodo para pedir el nombre del pais o continente al usuario
     def PedirNombre():
         while True:
-            nombre = input("\nIngrese el nombre: ").strip().capitalize()
-            if not nombre.isalpha():
+            nombre = input("\nIngrese el nombre: ").strip().title()
+            if not nombre.replace(" ", "").isalpha():
                 print(f"\n⚠️  El nombre no debe estar vacio y debe estar formado por letras.")
                 continue
             if len(nombre) < 2:
@@ -128,9 +126,6 @@ def programa_principal():
                 continue
             return nombre
 
-# ! ########################################
-# TODO: Verificar la validacion de cantidades
-# ! ########################################
     # Defino metodo para pedir la cantidad y devolverla sin errores de entrada
     def PedirCantidad():
         while True:
@@ -146,7 +141,6 @@ def programa_principal():
             break
         return cantidad
     
-    
     # Defino metodo para persistir los cambios en el archivo csv
     def PersistirCsv(filas_dataset):
         dir_archivo = DirArchivo()
@@ -154,6 +148,7 @@ def programa_principal():
             filas = csv.DictWriter(archivo, fieldnames=["NOMBRE","POBLACION","SUPERFICIE","CONTINENTE"])
             filas.writeheader()
             filas.writerows(filas_dataset)
+        return
 
     # Defino metodo para verificar si un pais existe
     def ExistePais(nombre):
@@ -186,6 +181,7 @@ def programa_principal():
     def AgregarPais():
         dir_archivo = DirArchivo()
         while True:
+            # Pido al usuario nombre de pais, poblacion, superficie y continente para agregarlo al dataset
             print("\nQue pais desea agregar?")
             nombre_pais = PedirNombre()
             if not ExistePais(nombre_pais):
@@ -193,8 +189,9 @@ def programa_principal():
                 poblacion = PedirCantidad()
                 print(f"\nCuanto tiene de superficie (km²) {nombre_pais}?")
                 superficie = PedirCantidad()
-                print(f"\nEn que continente se encuentra {nombre_pais}?")
-                continente = ElegirContinente()
+                print(f"\nIndique el continente donde se encuentra {nombre_pais}")
+                continente = PedirContinente()
+                # Agrego al archivo csv el nuevo pais con sus caracteristicas
                 with open(dir_archivo, "a", newline="", encoding="utf-8") as archivo:
                     filas = csv.DictWriter(archivo, fieldnames=["NOMBRE", "POBLACION","SUPERFICIE", "CONTINENTE"])
                     filas.writerow({"NOMBRE": nombre_pais, "POBLACION": poblacion,"SUPERFICIE": superficie, "CONTINENTE": continente})
@@ -203,6 +200,7 @@ def programa_principal():
             else:
                 print(f"\n ⚠️  El pais {nombre_pais} ya se encuentra dentro del dataset.")
                 continue
+        return
 
     # Defino metodo para actualizar poblacion y superficie de un pais indicado
     def ActualizarDatos():
@@ -215,9 +213,11 @@ def programa_principal():
                     if pais["NOMBRE"] == nombre:
                         print(f"\nIndique la poblacion nueva del pais '{nombre}'")
                         poblacion = PedirCantidad()
+                        # Actualizo poblacion
                         pais["POBLACION"] = poblacion
                         print(f"\nIndique la superficie (km²) nueva del pais '{nombre}'")
                         superficie = PedirCantidad()
+                        # Actualizo superficie
                         pais["SUPERFICIE"] = superficie
                         print(f"\n ✅ Se modifico con exito la poblacion y superficie del pais '{nombre}' | Poblacion actual: {pais["POBLACION"]}, Superficie actual: {pais["SUPERFICIE"]}km².")
                         PersistirCsv(paises)
@@ -226,26 +226,8 @@ def programa_principal():
                 print(f"\n ⚠️  El pais '{nombre}' no se encuentra dentro del dataset.")
         else:
             print("\n ⚠️  No hay paises disponibles dentro del dataset.")
-
-            
-    # # Defino metodo para consultar por un pais en especifico y lo muestro en pantalla
-    # def BuscarPais():
-    #     paises = ObtenerPaises()
-    #     if paises:
-    #         nombre_pais = PedirNombre()
-    #         if not ExistePais(nombre_pais):
-    #             print(f"\n ⚠️  El pais {nombre_pais} no se encuentra dentro del dataset.")
-    #         else:
-    #             for pais in paises:
-    #                 if pais["NOMBRE"] in nombre_pais:
-    #                     print(f"\n ✅ Paises que coinciden con {nombre_pais}.")
-    #                     print("=" * 54)
-    #                     print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]} \nContinente: {pais["CONTINENTE"]}")
-    #                     print("=" * 54)
-    #                     break
-    #     else:
-    #         print("\n ⚠️  No hay paises disponibles dentro del dataset.\n")
-            
+        return
+    
     # Defino metodo para consultar por un pais en especifico y lo muestro en pantalla
     def BuscarPais():
         paises = ObtenerPaises()
@@ -266,26 +248,88 @@ def programa_principal():
             # Si hay coincidencia marco que se encontro y lo muestro en pantalla
             if pais_busqueda in pais_dataset:
                 encontrado = True 
-                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]} \nContinente: {pais["CONTINENTE"]}")
+                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
                 print("=" * 54)
         # Si no se encuentra devuelvo mensaje que no se encontro
         if not encontrado:
             print(f"\n ⚠️  No se encontro ningun pais que coincida con '{pais_busqueda}'.")
+        return
 
+    def FiltrarContinentes():
+        paises = ObtenerPaises()
+        if not paises:
+            print("\n ⚠️  No hay paises disponibles dentro del dataset.\n")
+            # Salimos de la función si no hay países
+            return  
+        print(f"\nIndique el continente que desea verificar")
+        continente_busqueda = PedirContinente().lower()
+        # Creo variable encontrado para detectar si se encontro alguna coincidencia
+        encontrado = False 
+        # Tabla con paises que coinciden con la entrada
+        print("\n"+"=" * 54)
+        print(f"✅ Paises dentro de '{continente_busqueda.title()}': ")
+        print("=" * 54)
+        # Recorro la lista de paises buscando coincidencias
+        for pais in paises:
+            continente_dataset = pais["CONTINENTE"].lower()
+            # Si hay coincidencia marco que se encontro y lo muestro en pantalla
+            if continente_busqueda in continente_dataset:
+                encontrado = True 
+                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
+                print("=" * 54)
+        # Si no se encuentra devuelvo mensaje que no se encontro
+        if not encontrado:
+            print(f"\n ⚠️  No se encontro ningun pais que este dentro de '{continente_busqueda}'.")
+        return
+    
+    
+    def FiltrarPaises():
+        # Lista que contiene las opciones de filtro
+        filtro = ["1. Filtrar por Continente",
+                "2. Filtrar por Rango de poblacion",
+                "3. Filtrar por Rango de superficie",
+                "4. Volver al menu principal"]
+        while True:
+            # Mostramos las opciones del menu al usuario
+            print("\n"+"="*54)
+            print(" Elija una opción") 
+            print("="*54)
+            for opcion in filtro:
+                print(opcion)
+            print("="*54)
+            # Pedimos al usuario que seleccione una de las opciones
+            seleccion = input("Opción seleccionada: ").strip()
+            print("="*54)
+            match seleccion:
+                case "1":
+                    FiltrarContinentes()
+                case "2":
+                    FiltrarRangoPoblacion()
+                case "3":
+                    FiltrarRangoSuperficie()
+                case "4":
+                    print("✅ Volviendo al menu principal...\n")
+                    break
+                # Opcion inválida
+                case _:
+                    print("⚠️  Opción inválida. Por favor, elija una opción del 1 al 4.\n")
+                    continue
+        return        
+                
+                
 
 # Lista que contiene las opciones del menu principal
     menu_principal = ["1. Agregar pais",
                     "2. Actualizar poblacion y superficie de un pais",
-                    "3. Buscar un pais ",
-                    "4. ",
+                    "3. Buscar un pais",
+                    "4. Filtrar paises",
                     "5. ",
                     "6. ",
-                    "7. ",
-                    "8. Salir"]
+                    "7. Salir"]
     while True:
         # Mostramos las opciones del menu al usuario
         print("\n"+"="*54)
-        print("Bienvenido al catálogo de paises, elija una opción") 
+        print("Bienvenido al menu de paises, elija una opción") 
         print("="*54)
         for opcion in menu_principal:
             print(opcion)
@@ -323,12 +367,12 @@ def programa_principal():
                 #    o Promedio de superficie
                 #    o Cantidad de países por continente 
                 MostrarEstadisticas()
-            case "8":
+            case "7":
                 print("✅ Saliendo del programa... ¡Hasta luego!\n")
                 break
             # Opcion inválida
             case _:
-                print("⚠️  Opción inválida. Por favor, elija una opción del 1 al 8.\n")
+                print("⚠️  Opción inválida. Por favor, elija una opción del 1 al 7.\n")
                 continue            
     
 #=========================================================================================#
