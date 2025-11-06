@@ -117,6 +117,9 @@ def programa_principal():
     def PedirNombre():
         while True:
             nombre = input("\nIngrese el nombre: ").strip().capitalize()
+            if not nombre.isalpha():
+                print(f"\n⚠️  El nombre no debe estar vacio y debe estar formado por letras.")
+                continue
             if len(nombre) < 2:
                 print(f"\n⚠️  El nombre es demasiado corto.")
                 continue
@@ -198,15 +201,82 @@ def programa_principal():
                 print(f"\n ✅ Pais {nombre_pais} del continente {continente} con poblacion de {poblacion} personas y superficie de {superficie}km² agregado correctamente.")
                 break
             else:
-                print(f"\n ⚠️  El pais {nombre_pais} ya se encuentra dentro del catalogo.")
+                print(f"\n ⚠️  El pais {nombre_pais} ya se encuentra dentro del dataset.")
                 continue
+
+    # Defino metodo para actualizar poblacion y superficie de un pais indicado
+    def ActualizarDatos():
+        paises = ObtenerPaises()
+        if paises:
+            print("\nA que pais desea actualizarle su poblacion y superficie?")
+            nombre = PedirNombre()
+            if ExistePais(nombre):
+                for pais in paises:
+                    if pais["NOMBRE"] == nombre:
+                        print(f"\nIndique la poblacion nueva del pais '{nombre}'")
+                        poblacion = PedirCantidad()
+                        pais["POBLACION"] = poblacion
+                        print(f"\nIndique la superficie (km²) nueva del pais '{nombre}'")
+                        superficie = PedirCantidad()
+                        pais["SUPERFICIE"] = superficie
+                        print(f"\n ✅ Se modifico con exito la poblacion y superficie del pais '{nombre}' | Poblacion actual: {pais["POBLACION"]}, Superficie actual: {pais["SUPERFICIE"]}km².")
+                        PersistirCsv(paises)
+                        break
+            else:
+                print(f"\n ⚠️  El pais '{nombre}' no se encuentra dentro del dataset.")
+        else:
+            print("\n ⚠️  No hay paises disponibles dentro del dataset.")
+
             
+    # # Defino metodo para consultar por un pais en especifico y lo muestro en pantalla
+    # def BuscarPais():
+    #     paises = ObtenerPaises()
+    #     if paises:
+    #         nombre_pais = PedirNombre()
+    #         if not ExistePais(nombre_pais):
+    #             print(f"\n ⚠️  El pais {nombre_pais} no se encuentra dentro del dataset.")
+    #         else:
+    #             for pais in paises:
+    #                 if pais["NOMBRE"] in nombre_pais:
+    #                     print(f"\n ✅ Paises que coinciden con {nombre_pais}.")
+    #                     print("=" * 54)
+    #                     print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]} \nContinente: {pais["CONTINENTE"]}")
+    #                     print("=" * 54)
+    #                     break
+    #     else:
+    #         print("\n ⚠️  No hay paises disponibles dentro del dataset.\n")
             
-            
+    # Defino metodo para consultar por un pais en especifico y lo muestro en pantalla
+    def BuscarPais():
+        paises = ObtenerPaises()
+        if not paises:
+            print("\n ⚠️  No hay paises disponibles dentro del dataset.\n")
+            # Salimos de la función si no hay países
+            return  
+        pais_busqueda = PedirNombre().lower()
+        # Creo variable encontrado para detectar si se encontro alguna coincidencia
+        encontrado = False 
+        # Tabla con paises que coinciden con la entrada
+        print("\n"+"=" * 54)
+        print(f" Paises que coinciden con '{pais_busqueda}': ")
+        print("=" * 54)
+        # Recorro la lista de paises buscando coincidencias
+        for pais in paises:
+            pais_dataset = pais["NOMBRE"].lower()
+            # Si hay coincidencia marco que se encontro y lo muestro en pantalla
+            if pais_busqueda in pais_dataset:
+                encontrado = True 
+                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]} \nContinente: {pais["CONTINENTE"]}")
+                print("=" * 54)
+        # Si no se encuentra devuelvo mensaje que no se encontro
+        if not encontrado:
+            print(f"\n ⚠️  No se encontro ningun pais que coincida con '{pais_busqueda}'.")
+
+
 # Lista que contiene las opciones del menu principal
-    menu_principal = ["1.Agregar pais",
-                    "2.",
-                    "3.",
+    menu_principal = ["1. Agregar pais",
+                    "2. Actualizar poblacion y superficie de un pais",
+                    "3. Buscar un pais ",
                     "4. ",
                     "5. ",
                     "6. ",
