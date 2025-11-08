@@ -315,7 +315,7 @@ def programa_principal():
         encontrado = False 
         # Tabla con paises que coinciden con la entrada
         print("\n"+"=" * 54)
-        print(f"✅ Paises dentro de '{continente_busqueda.title()}': ")
+        print(f"✅ Paises dentro del continente '{continente_busqueda.title()}': ")
         print("=" * 54)
         # Recorro la lista de paises buscando coincidencias
         for pais in paises:
@@ -327,7 +327,7 @@ def programa_principal():
                 print("=" * 54)
         # Si no se encuentra devuelvo mensaje que no se encontro
         if not encontrado:
-            print(f"\n ⚠️  No se encontro ningun pais que este dentro de '{continente_busqueda}'.")
+            print(f"\n ⚠️  No se encontro ningun pais que este dentro del continente '{continente_busqueda}'.")
         return
     
     # Defino metodo para filtrar paises por un rango de poblacion indicado
@@ -450,9 +450,58 @@ def programa_principal():
         paises_ordenados = sorted(paises,key=ObtenerNombrePais,reverse=es_descendente)
         # Recorro la lista para ordenar
         for pais in paises_ordenados:
-            # Si hay coincidencia marco que se encontro y lo muestro en pantalla
             print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
             print("=" * 54)
+        return
+
+    def OrdenarPorPoblacion():
+        paises = ObtenerPaises()
+        if not paises:
+            print("\n ⚠️  No hay paises disponibles dentro del dataset.\n")
+            # Salimos de la función si no hay países
+            return
+        tipo_orden = PedirTipoOrden()
+        print("\n"+"=" * 54)
+        print(f"✅ Paises ordenados por Poblacion en orden {tipo_orden.title()}")
+        print("=" * 54)
+        # Defino funcion para obtener la poblacion del pais
+        def ObtenerPoblacionPais(pais):
+        # Devuelve la poblacion del pais.
+            return pais["POBLACION"]
+        # Si es descendente lo pasamos por parametro a reverse (True,False)
+        es_descendente = (tipo_orden == "descendente")
+        # Llamamos a sorted() usando el parámetro 'key', pasando la *poblacion* de nuestra funcion interna (sin parentesis).
+        paises_ordenados = sorted(paises,key=ObtenerPoblacionPais,reverse=es_descendente)
+        # Recorro la lista para ordenar
+        for pais in paises_ordenados:
+            print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
+            print("=" * 54)
+        return
+
+
+    def OrdenarPorSuperficie():
+        paises = ObtenerPaises()
+        if not paises:
+            print("\n ⚠️  No hay paises disponibles dentro del dataset.\n")
+            # Salimos de la función si no hay países
+            return
+        tipo_orden = PedirTipoOrden()
+        print("\n"+"=" * 54)
+        print(f"✅ Paises ordenados por Superficie en orden {tipo_orden.title()}")
+        print("=" * 54)
+        # Defino funcion para obtener la superficie del pais
+        def ObtenerSuperficiePais(pais):
+        # Devuelve la superficie del pais.
+            return pais["SUPERFICIE"]
+        # Si es descendente lo pasamos por parametro a reverse (True,False)
+        es_descendente = (tipo_orden == "descendente")
+        # Llamamos a sorted() usando el parámetro 'key', pasando la *superficie* de nuestra funcion interna (sin parentesis).
+        paises_ordenados = sorted(paises,key=ObtenerSuperficiePais,reverse=es_descendente)
+        # Recorro la lista para ordenar
+        for pais in paises_ordenados:
+            print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
+            print("=" * 54)
+        return
 
 
     # Defino metodo para pedir al usuario el tipo de orden (Ascendente o Descendente)
@@ -483,6 +532,145 @@ def programa_principal():
                     print("⚠️  Opción inválida. Por favor, elija una opción del 1 al 2.\n")
                     continue
         return tipo_orden
+    
+    
+#=========================================================================================#
+#                       Metodos para mostrar estadisticas de paises                       #
+#=========================================================================================#
+
+    # Defino metodo para mostrar el menu de seleccion de estadisticas
+    def MostrarEstadisticas():
+        # Lista que contiene las opciones de estadisticas
+        estadisticas = ["1. Pais con mayor y menor poblacion",
+                "2. Promedio de Poblacion",
+                "3. Promedio de Superficie",
+                "4. Cantidad de paises por continente",
+                "5. Volver al menu principal"]
+        while True:
+            # Mostramos las opciones del menu al usuario
+            print("\n"+"="*54)
+            print(" Elija una opción") 
+            print("="*54)
+            for opcion in estadisticas:
+                print(opcion)
+            print("="*54)
+            # Pedimos al usuario que seleccione una de las opciones
+            seleccion = input("Opción seleccionada: ").strip()
+            print("="*54)
+            match seleccion:
+                case "1":
+                    PaisMaxMinPoblacion()
+                case "2":
+                    PromedioPoblacion()
+                case "3":
+                    PromedioSuperficie()
+                case "4":
+                    CantPaisesContinente()
+                case "5":
+                    print("✅ Volviendo al menu principal...\n")
+                    break
+                # Opcion inválida
+                case _:
+                    print("⚠️  Opción inválida. Por favor, elija una opción del 1 al 5.\n")
+                    continue
+        return      
+    
+    
+    # Defino metodo para calcular el pais con mayor poblacion y el pais con menor poblacion
+    def PaisMaxMinPoblacion():
+        paises = ObtenerPaises()
+        if not paises:
+            print("\n ⚠️  No hay paises disponibles dentro del dataset.\n")
+            # Salimos de la función si no hay países
+            return
+        # Defino funcion para obtener la poblacion del pais
+        def ObtenerPoblacionPais(pais):
+        # Devuelve la poblacion del pais.
+            return pais["POBLACION"]
+        # Llamamos a min() y max() usando el parámetro 'key', pasando la *poblacion* de nuestra funcion interna (sin parentesis).
+        # Guardo el pais con mayor poblacion y menor poblacion
+        pais_max_poblacion = max(paises,key=ObtenerPoblacionPais)
+        pais_min_poblacion = min(paises,key=ObtenerPoblacionPais)
+        print("\n"+"=" * 54)
+        print(f"✅ Pais con mayor Poblacion")
+        print("=" * 54)
+        print(f"Pais: {pais_max_poblacion["NOMBRE"]} \nPoblacion: {pais_max_poblacion["POBLACION"]} \nSuperficie: {pais_max_poblacion["SUPERFICIE"]}km² \nContinente: {pais_max_poblacion["CONTINENTE"]}")
+        print("=" * 54)
+        print("\n"+"=" * 54)
+        print(f"✅ Pais con menor Poblacion")
+        print("=" * 54)
+        print(f"Pais: {pais_min_poblacion["NOMBRE"]} \nPoblacion: {pais_min_poblacion["POBLACION"]} \nSuperficie: {pais_min_poblacion["SUPERFICIE"]}km² \nContinente: {pais_min_poblacion["CONTINENTE"]}")
+        print("=" * 54)
+        return
+
+
+    # Defino metodo para calcular el promedio de la poblacion total entre los paises de la lista
+    def PromedioPoblacion():
+        # Utilizo el paquete statistics de python para utilizar funciones (mean para calcular el promedio)
+        from statistics import mean
+        paises = ObtenerPaises()
+        lista_poblaciones = []
+        if not paises:
+            print("\n ⚠️  No hay paises disponibles dentro del dataset.\n")
+            # Salimos de la función si no hay países
+            return
+        # Recorro paises y guardo su poblacion en la lista de poblaciones
+        for pais in paises:
+            lista_poblaciones.append(pais["POBLACION"])
+            # Calculo el promedio en la lista
+            promedio = int(mean(lista_poblaciones))
+        print("\n"+"=" * 54)
+        print(f"✅ Promedio de Poblacion entre los paises del dataset")
+        print("=" * 54)
+        print(f"Resultado: {promedio}")
+        print("=" * 54)
+        return
+
+
+    # Defino metodo para calcular el promedio de la superficie total entre los paises de la lista
+    def PromedioSuperficie():
+        # Utilizo el paquete statistics de python para utilizar funciones (mean para calcular el promedio)
+        from statistics import mean
+        paises = ObtenerPaises()
+        lista_superficies = []
+        if not paises:
+            print("\n ⚠️  No hay paises disponibles dentro del dataset.\n")
+            # Salimos de la función si no hay países
+            return
+        # Recorro paises y guardo su superficie en la lista de superficies
+        for pais in paises:
+            lista_superficies.append(pais["SUPERFICIE"])
+            promedio = round(mean(lista_superficies),2)
+        print("\n"+"=" * 54)
+        print(f"✅ Promedio de Superficie entre los paises del dataset")
+        print("=" * 54)
+        print(f"Resultado: {promedio}km²")
+        print("=" * 54)
+        return
+    
+    
+    # # Defino metodo para contar la cantidad de paises por continente
+    # def CantPaisesContinente():
+    #     paises = ObtenerPaises()
+    #     if not paises:
+    #         print("\n ⚠️  No hay paises disponibles dentro del dataset.\n")
+    #         # Salimos de la función si no hay países
+    #         return
+    #     paises_por_continente = {}
+    #     for pais in paises:
+    #         if pais["CONTINENTE"] in paises_por_continente.keys():
+    #             print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
+    #             print("=" * 54)   
+    #     # Inicializo diccionario paises_por_continente, que va a contener los paises dentro de su continente
+    #     for continente in paises_por_continente:
+    #         print("\n"+"=" * 54)
+    #         print(f"✅ Paises dentro del continente '{continente}'")
+    #         print("=" * 54)
+    #         for pais in continente:
+    #             print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
+    #             print("=" * 54)
+    #     return
+    
 
 
 
@@ -495,7 +683,7 @@ def programa_principal():
                     "3. Buscar un pais",
                     "4. Filtrar paises",
                     "5. Ordenar paises",
-                    "6. ",
+                    "6. Mostrar estadisticas",
                     "7. Salir"]
     while True:
         # Mostramos las opciones del menu al usuario
