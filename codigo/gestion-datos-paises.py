@@ -282,7 +282,42 @@ def programa_principal():
             print(f"\n ⚠️  No se encontro ningun pais que este dentro de '{continente_busqueda}'.")
         return
     
-    
+    def FiltrarRangoPoblacion():
+        paises = ObtenerPaises()
+        if not paises:
+            print("\n ⚠️  No hay paises disponibles dentro del dataset.\n")
+            # Salimos de la función si no hay países
+            return    
+        print(f"\nIndique el MINIMO del rango de poblacion que desea verificar")
+        min_rango = PedirCantidad()
+        print(f"\nIndique el MAXIMO del rango de poblacion que desea verificar")
+        max_rango = PedirCantidad()
+        # Creo variable encontrado para detectar si se encontro alguna coincidencia
+        encontrado = False 
+        # Tabla con paises que coinciden con la entrada
+        print("\n"+"=" * 54)
+        print(f"✅ Paises dentro del rango de poblacion: '{min_rango} - {max_rango}' ")
+        print("=" * 54)
+        # Recorro la lista de paises buscando coincidencias
+        for pais in paises:
+            poblacion_dataset = pais["POBLACION"]
+            # Si hay coincidencia marco que se encontro y lo muestro en pantalla
+            if  min_rango <= poblacion_dataset <= max_rango:
+                encontrado = True 
+                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
+                print("=" * 54)
+        # Si no se encuentra devuelvo mensaje que no se encontro
+        if not encontrado:
+            print(f"\n ⚠️  No se encontro ningun pais que este dentro del rango de poblacion:  '{min_rango} - {max_rango}'.")
+        return
+        
+        
+        
+        
+        
+        
+        
+        
     def FiltrarPaises():
         # Lista que contiene las opciones de filtro
         filtro = ["1. Filtrar por Continente",
