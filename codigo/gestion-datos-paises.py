@@ -63,7 +63,8 @@ def programa_principal():
     # Defino metodo para verificar si existe el archivo
     def ExisteArchivo(archivo):
         return os.path.isfile(archivo)
-    
+
+    # Defino metodo para pedir un continente al usuario, con menu de seleccion
     def PedirContinente():
         continentes = [ "1. Asia",
                     "2. Africa",
@@ -110,7 +111,8 @@ def programa_principal():
                     print("⚠️  Opción inválida. Por favor, elija una opción del 1 al 7.\n")
                     continue    
         return continente   
-    
+
+
     # Defino metodo para pedir el nombre del pais o continente al usuario
     def PedirNombre():
         while True:
@@ -125,6 +127,7 @@ def programa_principal():
                 print(f"\n⚠️  El nombre es demasiado largo.")
                 continue
             return nombre
+
 
     # Defino metodo para pedir la cantidad y devolverla sin errores de entrada
     def PedirCantidad():
@@ -141,6 +144,7 @@ def programa_principal():
             break
         return cantidad
     
+    
     # Defino metodo para persistir los cambios en el archivo csv
     def PersistirCsv(filas_dataset):
         dir_archivo = DirArchivo()
@@ -150,6 +154,7 @@ def programa_principal():
             filas.writerows(filas_dataset)
         return
 
+
     # Defino metodo para verificar si un pais existe
     def ExistePais(nombre):
         # Verifica si existe un pais con el nombre indicado en el archivo.
@@ -158,6 +163,7 @@ def programa_principal():
             if pais["NOMBRE"] == nombre:
                 return True
         return False
+
 
     # Defino metodo para obtener paises, en caso que no existan crea un nuevo archivo vacio
     def ObtenerPaises():
@@ -201,6 +207,7 @@ def programa_principal():
                 print(f"\n ⚠️  El pais {nombre_pais} ya se encuentra dentro del dataset.")
                 continue
         return
+
 
     # Defino metodo para actualizar poblacion y superficie de un pais indicado
     def ActualizarDatos():
@@ -255,69 +262,12 @@ def programa_principal():
             print(f"\n ⚠️  No se encontro ningun pais que coincida con '{pais_busqueda}'.")
         return
 
-    def FiltrarContinentes():
-        paises = ObtenerPaises()
-        if not paises:
-            print("\n ⚠️  No hay paises disponibles dentro del dataset.\n")
-            # Salimos de la función si no hay países
-            return  
-        print(f"\nIndique el continente que desea verificar")
-        continente_busqueda = PedirContinente().lower()
-        # Creo variable encontrado para detectar si se encontro alguna coincidencia
-        encontrado = False 
-        # Tabla con paises que coinciden con la entrada
-        print("\n"+"=" * 54)
-        print(f"✅ Paises dentro de '{continente_busqueda.title()}': ")
-        print("=" * 54)
-        # Recorro la lista de paises buscando coincidencias
-        for pais in paises:
-            continente_dataset = pais["CONTINENTE"].lower()
-            # Si hay coincidencia marco que se encontro y lo muestro en pantalla
-            if continente_busqueda in continente_dataset:
-                encontrado = True 
-                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
-                print("=" * 54)
-        # Si no se encuentra devuelvo mensaje que no se encontro
-        if not encontrado:
-            print(f"\n ⚠️  No se encontro ningun pais que este dentro de '{continente_busqueda}'.")
-        return
-    
-    def FiltrarRangoPoblacion():
-        paises = ObtenerPaises()
-        if not paises:
-            print("\n ⚠️  No hay paises disponibles dentro del dataset.\n")
-            # Salimos de la función si no hay países
-            return    
-        print(f"\nIndique el MINIMO del rango de poblacion que desea verificar")
-        min_rango = PedirCantidad()
-        print(f"\nIndique el MAXIMO del rango de poblacion que desea verificar")
-        max_rango = PedirCantidad()
-        # Creo variable encontrado para detectar si se encontro alguna coincidencia
-        encontrado = False 
-        # Tabla con paises que coinciden con la entrada
-        print("\n"+"=" * 54)
-        print(f"✅ Paises dentro del rango de poblacion: '{min_rango} - {max_rango}' ")
-        print("=" * 54)
-        # Recorro la lista de paises buscando coincidencias
-        for pais in paises:
-            poblacion_dataset = pais["POBLACION"]
-            # Si hay coincidencia marco que se encontro y lo muestro en pantalla
-            if  min_rango <= poblacion_dataset <= max_rango:
-                encontrado = True 
-                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
-                print("=" * 54)
-        # Si no se encuentra devuelvo mensaje que no se encontro
-        if not encontrado:
-            print(f"\n ⚠️  No se encontro ningun pais que este dentro del rango de poblacion:  '{min_rango} - {max_rango}'.")
-        return
+#=========================================================================================#
+#                              Metodos para Filtrar paises                                #
+#=========================================================================================#
         
         
-        
-        
-        
-        
-        
-        
+    # Defino metodo que contiene el menu para filtrar paises
     def FiltrarPaises():
         # Lista que contiene las opciones de filtro
         filtro = ["1. Filtrar por Continente",
@@ -349,16 +299,202 @@ def programa_principal():
                 case _:
                     print("⚠️  Opción inválida. Por favor, elija una opción del 1 al 4.\n")
                     continue
-        return        
-                
-                
+        return    
 
+
+    # Defino metodo para filtrar paises por continente seleccionado
+    def FiltrarContinentes():
+        paises = ObtenerPaises()
+        if not paises:
+            print("\n ⚠️  No hay paises disponibles dentro del dataset.\n")
+            # Salimos de la función si no hay países
+            return  
+        print(f"\nIndique el continente que desea verificar")
+        continente_busqueda = PedirContinente().lower()
+        # Creo variable encontrado para detectar si se encontro alguna coincidencia
+        encontrado = False 
+        # Tabla con paises que coinciden con la entrada
+        print("\n"+"=" * 54)
+        print(f"✅ Paises dentro de '{continente_busqueda.title()}': ")
+        print("=" * 54)
+        # Recorro la lista de paises buscando coincidencias
+        for pais in paises:
+            continente_dataset = pais["CONTINENTE"].lower()
+            # Si hay coincidencia marco que se encontro y lo muestro en pantalla
+            if continente_busqueda in continente_dataset:
+                encontrado = True 
+                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
+                print("=" * 54)
+        # Si no se encuentra devuelvo mensaje que no se encontro
+        if not encontrado:
+            print(f"\n ⚠️  No se encontro ningun pais que este dentro de '{continente_busqueda}'.")
+        return
+    
+    # Defino metodo para filtrar paises por un rango de poblacion indicado
+    def FiltrarRangoPoblacion():
+        paises = ObtenerPaises()
+        if not paises:
+            print("\n ⚠️  No hay paises disponibles dentro del dataset.\n")
+            # Salimos de la función si no hay países
+            return    
+        print(f"\nIndique el MINIMO del rango de poblacion que desea verificar")
+        min_rango = PedirCantidad()
+        print(f"\nIndique el MAXIMO del rango de poblacion que desea verificar")
+        max_rango = PedirCantidad()
+        # Creo variable encontrado para detectar si se encontro alguna coincidencia
+        encontrado = False 
+        # Tabla con paises que coinciden con la entrada
+        print("\n"+"=" * 54)
+        print(f"✅ Paises dentro del rango de poblacion: '{min_rango} - {max_rango}' ")
+        print("=" * 54)
+        # Recorro la lista de paises buscando coincidencias
+        for pais in paises:
+            poblacion_dataset = pais["POBLACION"]
+            # Si hay coincidencia marco que se encontro y lo muestro en pantalla
+            if  min_rango <= poblacion_dataset <= max_rango:
+                encontrado = True 
+                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
+                print("=" * 54)
+        # Si no se encuentra devuelvo mensaje que no se encontro
+        if not encontrado:
+            print(f"\n ⚠️  No se encontro ningun pais que este dentro del rango de poblacion:  '{min_rango} - {max_rango}'.")
+        return
+        
+    # Defino metodo para filtrar paises por un rango de superficie indicado
+    def FiltrarRangoSuperficie():
+        paises = ObtenerPaises()
+        if not paises:
+            print("\n ⚠️  No hay paises disponibles dentro del dataset.\n")
+            # Salimos de la función si no hay países
+            return    
+        print(f"\nIndique el MINIMO del rango de superficie (km²) que desea verificar")
+        min_rango = PedirCantidad()
+        print(f"\nIndique el MAXIMO del rango de superficie (km²) que desea verificar")
+        max_rango = PedirCantidad()
+        # Creo variable encontrado para detectar si se encontro alguna coincidencia
+        encontrado = False 
+        # Tabla con paises que coinciden con la entrada
+        print("\n"+"=" * 54)
+        print(f"✅ Paises dentro del rango de superficie: '{min_rango}km² - {max_rango}km²' ")
+        print("=" * 54)
+        # Recorro la lista de paises buscando coincidencias
+        for pais in paises:
+            superficie_dataset = pais["SUPERFICIE"]
+            # Si hay coincidencia marco que se encontro y lo muestro en pantalla
+            if  min_rango <= superficie_dataset <= max_rango:
+                encontrado = True 
+                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
+                print("=" * 54)
+        # Si no se encuentra devuelvo mensaje que no se encontro
+        if not encontrado:
+            print(f"\n ⚠️  No se encontro ningun pais que este dentro del rango de poblacion:  '{min_rango}km² - {max_rango}km²'.")
+        return
+    
+    
+#=========================================================================================#
+#                               Metodos para ordenar paises                               #
+#=========================================================================================#
+    
+    # Defino metodo que contiene el menu para ordenar paises
+    def OrdenarPaises():         
+        # Lista que contiene las opciones de ordenamiento
+        filtro = ["1. Ordenar por Nombre",
+                "2. Ordenar por Poblacion",
+                "3. Ordenar por Superficie",
+                "4. Volver al menu principal"]
+        while True:
+            # Mostramos las opciones del menu al usuario
+            print("\n"+"="*54)
+            print(" Elija una opción") 
+            print("="*54)
+            for opcion in filtro:
+                print(opcion)
+            print("="*54)
+            # Pedimos al usuario que seleccione una de las opciones
+            seleccion = input("Opción seleccionada: ").strip()
+            print("="*54)
+            match seleccion:
+                case "1":
+                    OrdenarPorNombre()
+                case "2":
+                    OrdenarPorPoblacion()
+                case "3":
+                    OrdenarPorSuperficie()
+                case "4":
+                    print("✅ Volviendo al menu principal...\n")
+                    break
+                # Opcion inválida
+                case _:
+                    print("⚠️  Opción inválida. Por favor, elija una opción del 1 al 4.\n")
+                    continue
+        return                  
+
+
+    def OrdenarPorNombre():
+        paises = ObtenerPaises()
+        if not paises:
+            print("\n ⚠️  No hay paises disponibles dentro del dataset.\n")
+            # Salimos de la función si no hay países
+            return
+        tipo_orden = PedirTipoOrden()
+        print("\n"+"=" * 54)
+        print(f"✅ Paises ordenados por Nombre en orden {tipo_orden.title()}")
+        print("=" * 54)
+        # Defino funcion para obtener el nombre del pais
+        def ObtenerNombrePais(pais):
+        # Devuelve el nombre del pais en minusculas.
+            return pais["NOMBRE"].lower()
+        # Si es descendente lo pasamos por parametro a reverse (True,False)
+        es_descendente = (tipo_orden == "descendente")
+        # Llamamos a sorted() usando el parámetro 'key', pasando el *nombre* de nuestra funcion interna (sin parentesis).
+        paises_ordenados = sorted(paises,key=ObtenerNombrePais,reverse=es_descendente)
+        # Recorro la lista para ordenar
+        for pais in paises_ordenados:
+            # Si hay coincidencia marco que se encontro y lo muestro en pantalla
+            print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
+            print("=" * 54)
+
+
+    # Defino metodo para pedir al usuario el tipo de orden (Ascendente o Descendente)
+    def PedirTipoOrden():
+        # Lista que contiene las opciones de ordenamiento
+        filtro = ["1. Ascendente",
+                "2. Descendente"]
+        while True:
+            # Mostramos las opciones del menu al usuario
+            print("\n"+"="*54)
+            print(" Elija una opción") 
+            print("="*54)
+            for opcion in filtro:
+                print(opcion)
+            print("="*54)
+            # Pedimos al usuario que seleccione una de las opciones
+            seleccion = input("Opción seleccionada: ").strip()
+            print("="*54)
+            match seleccion:
+                case "1":
+                    tipo_orden = "ascendente"
+                    break
+                case "2":
+                    tipo_orden = "descendente"
+                    break
+                # Opcion inválida
+                case _:
+                    print("⚠️  Opción inválida. Por favor, elija una opción del 1 al 2.\n")
+                    continue
+        return tipo_orden
+
+
+
+#=========================================================================================#
+#                                  Menu principal                                         #
+#=========================================================================================#
 # Lista que contiene las opciones del menu principal
     menu_principal = ["1. Agregar pais",
                     "2. Actualizar poblacion y superficie de un pais",
                     "3. Buscar un pais",
                     "4. Filtrar paises",
-                    "5. ",
+                    "5. Ordenar paises",
                     "6. ",
                     "7. Salir"]
     while True:
