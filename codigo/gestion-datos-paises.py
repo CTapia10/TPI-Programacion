@@ -430,6 +430,7 @@ def programa_principal():
         return                  
 
 
+    # Defino metodo para ordenar los paises por nombre
     def OrdenarPorNombre():
         paises = ObtenerPaises()
         if not paises:
@@ -454,6 +455,8 @@ def programa_principal():
             print("=" * 62)
         return
 
+
+    # Defino metodo para ordenar los paises por poblacion
     def OrdenarPorPoblacion():
         paises = ObtenerPaises()
         if not paises:
@@ -478,7 +481,7 @@ def programa_principal():
             print("=" * 62)
         return
 
-
+    # Defino metodo para ordenar los paises por superficie
     def OrdenarPorSuperficie():
         paises = ObtenerPaises()
         if not paises:
