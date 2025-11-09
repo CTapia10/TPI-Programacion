@@ -193,7 +193,7 @@ Opción seleccionada: 9
 ```
 ---
 
-## Diagrama de Estructura Modular
+## 🗺️ Diagrama de Flujo del Programa
 
 ```mermaid
 graph TD
