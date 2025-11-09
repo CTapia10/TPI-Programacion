@@ -75,15 +75,15 @@ def programa_principal():
                     "7. Oceania" ]
         while True:
         # Mostramos las opciones del menu al usuario
-            print("\n"+"="*54)
+            print("\n"+"="*62)
             print("Continentes:") 
-            print("="*54)
+            print("="*62)
             for opcion in continentes:
                 print(opcion)
-            print("="*54)
+            print("="*62)
             # Pedimos al usuario que seleccione una de las opciones
             seleccion = input("Opción seleccionada: ").strip()
-            print("="*54)
+            print("="*62)
             match seleccion:    
                 case "1":
                     continente = "Asia"
@@ -246,17 +246,17 @@ def programa_principal():
         # Creo variable encontrado para detectar si se encontro alguna coincidencia
         encontrado = False 
         # Tabla con paises que coinciden con la entrada
-        print("\n"+"=" * 54)
+        print("\n"+"=" * 62)
         print(f" Paises que coinciden con '{pais_busqueda}': ")
-        print("=" * 54)
+        print("=" * 62)
         # Recorro la lista de paises buscando coincidencias
         for pais in paises:
             pais_dataset = pais["NOMBRE"].lower()
             # Si hay coincidencia marco que se encontro y lo muestro en pantalla
             if pais_busqueda in pais_dataset:
                 encontrado = True 
-                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
-                print("=" * 54)
+                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]:,} \nSuperficie: {pais["SUPERFICIE"]:,}km² \nContinente: {pais["CONTINENTE"]}")
+                print("=" * 62)
         # Si no se encuentra devuelvo mensaje que no se encontro
         if not encontrado:
             print(f"\n ⚠️  No se encontro ningun pais que coincida con '{pais_busqueda}'.")
@@ -276,15 +276,15 @@ def programa_principal():
                 "4. Volver al menu principal"]
         while True:
             # Mostramos las opciones del menu al usuario
-            print("\n"+"="*54)
+            print("\n"+"="*62)
             print(" Elija una opción") 
-            print("="*54)
+            print("="*62)
             for opcion in filtro:
                 print(opcion)
-            print("="*54)
+            print("="*62)
             # Pedimos al usuario que seleccione una de las opciones
             seleccion = input("Opción seleccionada: ").strip()
-            print("="*54)
+            print("="*62)
             match seleccion:
                 case "1":
                     FiltrarContinentes()
@@ -314,17 +314,17 @@ def programa_principal():
         # Creo variable encontrado para detectar si se encontro alguna coincidencia
         encontrado = False 
         # Tabla con paises que coinciden con la entrada
-        print("\n"+"=" * 54)
+        print("\n"+"=" * 62)
         print(f"✅ Paises dentro del continente '{continente_busqueda.title()}': ")
-        print("=" * 54)
+        print("=" * 62)
         # Recorro la lista de paises buscando coincidencias
         for pais in paises:
             continente_dataset = pais["CONTINENTE"].lower()
             # Si hay coincidencia marco que se encontro y lo muestro en pantalla
             if continente_busqueda in continente_dataset:
                 encontrado = True 
-                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
-                print("=" * 54)
+                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]:,} \nSuperficie: {pais["SUPERFICIE"]:,}km² \nContinente: {pais["CONTINENTE"]}")
+                print("=" * 62)
         # Si no se encuentra devuelvo mensaje que no se encontro
         if not encontrado:
             print(f"\n ⚠️  No se encontro ningun pais que este dentro del continente '{continente_busqueda}'.")
@@ -344,17 +344,17 @@ def programa_principal():
         # Creo variable encontrado para detectar si se encontro alguna coincidencia
         encontrado = False 
         # Tabla con paises que coinciden con la entrada
-        print("\n"+"=" * 54)
+        print("\n"+"=" * 62)
         print(f"✅ Paises dentro del rango de poblacion: '{min_rango} - {max_rango}' ")
-        print("=" * 54)
+        print("=" * 62)
         # Recorro la lista de paises buscando coincidencias
         for pais in paises:
             poblacion_dataset = pais["POBLACION"]
             # Si hay coincidencia marco que se encontro y lo muestro en pantalla
             if  min_rango <= poblacion_dataset <= max_rango:
                 encontrado = True 
-                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
-                print("=" * 54)
+                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]:,} \nSuperficie: {pais["SUPERFICIE"]:,}km² \nContinente: {pais["CONTINENTE"]}")
+                print("=" * 62)
         # Si no se encuentra devuelvo mensaje que no se encontro
         if not encontrado:
             print(f"\n ⚠️  No se encontro ningun pais que este dentro del rango de poblacion:  '{min_rango} - {max_rango}'.")
@@ -374,17 +374,17 @@ def programa_principal():
         # Creo variable encontrado para detectar si se encontro alguna coincidencia
         encontrado = False 
         # Tabla con paises que coinciden con la entrada
-        print("\n"+"=" * 54)
+        print("\n"+"=" * 62)
         print(f"✅ Paises dentro del rango de superficie: '{min_rango}km² - {max_rango}km²' ")
-        print("=" * 54)
+        print("=" * 62)
         # Recorro la lista de paises buscando coincidencias
         for pais in paises:
             superficie_dataset = pais["SUPERFICIE"]
             # Si hay coincidencia marco que se encontro y lo muestro en pantalla
             if  min_rango <= superficie_dataset <= max_rango:
                 encontrado = True 
-                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
-                print("=" * 54)
+                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]:,} \nSuperficie: {pais["SUPERFICIE"]:,}km² \nContinente: {pais["CONTINENTE"]}")
+                print("=" * 62)
         # Si no se encuentra devuelvo mensaje que no se encontro
         if not encontrado:
             print(f"\n ⚠️  No se encontro ningun pais que este dentro del rango de poblacion:  '{min_rango}km² - {max_rango}km²'.")
@@ -404,15 +404,15 @@ def programa_principal():
                 "4. Volver al menu principal"]
         while True:
             # Mostramos las opciones del menu al usuario
-            print("\n"+"="*54)
+            print("\n"+"="*62)
             print(" Elija una opción") 
-            print("="*54)
+            print("="*62)
             for opcion in filtro:
                 print(opcion)
-            print("="*54)
+            print("="*62)
             # Pedimos al usuario que seleccione una de las opciones
             seleccion = input("Opción seleccionada: ").strip()
-            print("="*54)
+            print("="*62)
             match seleccion:
                 case "1":
                     OrdenarPorNombre()
@@ -437,9 +437,9 @@ def programa_principal():
             # Salimos de la función si no hay países
             return
         tipo_orden = PedirTipoOrden()
-        print("\n"+"=" * 54)
+        print("\n"+"=" * 62)
         print(f"✅ Paises ordenados por Nombre en orden {tipo_orden.title()}")
-        print("=" * 54)
+        print("=" * 62)
         # Defino funcion para obtener el nombre del pais
         def ObtenerNombrePais(pais):
         # Devuelve el nombre del pais en minusculas.
@@ -450,8 +450,8 @@ def programa_principal():
         paises_ordenados = sorted(paises,key=ObtenerNombrePais,reverse=es_descendente)
         # Recorro la lista para ordenar
         for pais in paises_ordenados:
-            print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
-            print("=" * 54)
+            print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]:,} \nSuperficie: {pais["SUPERFICIE"]:,}km² \nContinente: {pais["CONTINENTE"]}")
+            print("=" * 62)
         return
 
     def OrdenarPorPoblacion():
@@ -461,9 +461,9 @@ def programa_principal():
             # Salimos de la función si no hay países
             return
         tipo_orden = PedirTipoOrden()
-        print("\n"+"=" * 54)
+        print("\n"+"=" * 62)
         print(f"✅ Paises ordenados por Poblacion en orden {tipo_orden.title()}")
-        print("=" * 54)
+        print("=" * 62)
         # Defino funcion para obtener la poblacion del pais
         def ObtenerPoblacionPais(pais):
         # Devuelve la poblacion del pais.
@@ -474,8 +474,8 @@ def programa_principal():
         paises_ordenados = sorted(paises,key=ObtenerPoblacionPais,reverse=es_descendente)
         # Recorro la lista para ordenar
         for pais in paises_ordenados:
-            print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
-            print("=" * 54)
+            print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]:,} \nSuperficie: {pais["SUPERFICIE"]:,}km² \nContinente: {pais["CONTINENTE"]}")
+            print("=" * 62)
         return
 
 
@@ -486,9 +486,9 @@ def programa_principal():
             # Salimos de la función si no hay países
             return
         tipo_orden = PedirTipoOrden()
-        print("\n"+"=" * 54)
+        print("\n"+"=" * 62)
         print(f"✅ Paises ordenados por Superficie en orden {tipo_orden.title()}")
-        print("=" * 54)
+        print("=" * 62)
         # Defino funcion para obtener la superficie del pais
         def ObtenerSuperficiePais(pais):
         # Devuelve la superficie del pais.
@@ -499,8 +499,8 @@ def programa_principal():
         paises_ordenados = sorted(paises,key=ObtenerSuperficiePais,reverse=es_descendente)
         # Recorro la lista para ordenar
         for pais in paises_ordenados:
-            print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
-            print("=" * 54)
+            print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]:,} \nSuperficie: {pais["SUPERFICIE"]:,}km² \nContinente: {pais["CONTINENTE"]}")
+            print("=" * 62)
         return
 
 
@@ -511,15 +511,15 @@ def programa_principal():
                 "2. Descendente"]
         while True:
             # Mostramos las opciones del menu al usuario
-            print("\n"+"="*54)
+            print("\n"+"="*62)
             print(" Elija una opción") 
-            print("="*54)
+            print("="*62)
             for opcion in filtro:
                 print(opcion)
-            print("="*54)
+            print("="*62)
             # Pedimos al usuario que seleccione una de las opciones
             seleccion = input("Opción seleccionada: ").strip()
-            print("="*54)
+            print("="*62)
             match seleccion:
                 case "1":
                     tipo_orden = "ascendente"
@@ -548,15 +548,15 @@ def programa_principal():
                 "5. Volver al menu principal"]
         while True:
             # Mostramos las opciones del menu al usuario
-            print("\n"+"="*54)
+            print("\n"+"="*62)
             print(" Elija una opción") 
-            print("="*54)
+            print("="*62)
             for opcion in estadisticas:
                 print(opcion)
-            print("="*54)
+            print("="*62)
             # Pedimos al usuario que seleccione una de las opciones
             seleccion = input("Opción seleccionada: ").strip()
-            print("="*54)
+            print("="*62)
             match seleccion:
                 case "1":
                     PaisMaxMinPoblacion()
@@ -591,16 +591,16 @@ def programa_principal():
         # Guardo el pais con mayor poblacion y menor poblacion
         pais_max_poblacion = max(paises,key=ObtenerPoblacionPais)
         pais_min_poblacion = min(paises,key=ObtenerPoblacionPais)
-        print("\n"+"=" * 54)
+        print("\n"+"=" * 62)
         print(f"✅ Pais con mayor Poblacion")
-        print("=" * 54)
-        print(f"Pais: {pais_max_poblacion["NOMBRE"]} \nPoblacion: {pais_max_poblacion["POBLACION"]} \nSuperficie: {pais_max_poblacion["SUPERFICIE"]}km² \nContinente: {pais_max_poblacion["CONTINENTE"]}")
-        print("=" * 54)
-        print("\n"+"=" * 54)
+        print("=" * 62)
+        print(f"Pais: {pais_max_poblacion["NOMBRE"]} \nPoblacion: {pais_max_poblacion["POBLACION"]:,} \nSuperficie: {pais_max_poblacion["SUPERFICIE"]:,}km² \nContinente: {pais_max_poblacion["CONTINENTE"]}")
+        print("=" * 62)
+        print("\n"+"=" * 62)
         print(f"✅ Pais con menor Poblacion")
-        print("=" * 54)
-        print(f"Pais: {pais_min_poblacion["NOMBRE"]} \nPoblacion: {pais_min_poblacion["POBLACION"]} \nSuperficie: {pais_min_poblacion["SUPERFICIE"]}km² \nContinente: {pais_min_poblacion["CONTINENTE"]}")
-        print("=" * 54)
+        print("=" * 62)
+        print(f"Pais: {pais_min_poblacion["NOMBRE"]} \nPoblacion: {pais_min_poblacion["POBLACION"]:,} \nSuperficie: {pais_min_poblacion["SUPERFICIE"]:,}km² \nContinente: {pais_min_poblacion["CONTINENTE"]}")
+        print("=" * 62)
         return
 
 
@@ -619,11 +619,11 @@ def programa_principal():
             lista_poblaciones.append(pais["POBLACION"])
             # Calculo el promedio en la lista
             promedio = int(mean(lista_poblaciones))
-        print("\n"+"=" * 54)
+        print("\n"+"=" * 62)
         print(f"✅ Promedio de Poblacion entre los paises del dataset")
-        print("=" * 54)
+        print("=" * 62)
         print(f"Resultado: {promedio}")
-        print("=" * 54)
+        print("=" * 62)
         return
 
 
@@ -641,11 +641,11 @@ def programa_principal():
         for pais in paises:
             lista_superficies.append(pais["SUPERFICIE"])
             promedio = round(mean(lista_superficies),2)
-        print("\n"+"=" * 54)
+        print("\n"+"=" * 62)
         print(f"✅ Promedio de Superficie entre los paises del dataset")
-        print("=" * 54)
+        print("=" * 62)
         print(f"Resultado: {promedio}km²")
-        print("=" * 54)
+        print("=" * 62)
         return
     
     
@@ -656,22 +656,22 @@ def programa_principal():
             print("\n ⚠️  No hay paises disponibles dentro del dataset.\n")
             # Salimos de la función si no hay países
             return
-        paises_por_continente = {}
-        for pais in paises:
-            if pais["CONTINENTE"] in paises_por_continente:
-                paises_por_continente[pais["CONTINENTE"]].append(pais)
-            else:
-                paises_por_continente[pais["CONTINENTE"]] = [pais]
         # Inicializo diccionario paises_por_continente, que va a contener los paises dentro de su continente
+        paises_por_continente = {}
+        # Recorro lista paises y guardo en el diccionario de paises_por_continente los paises y su informacion en lista de continentes
+        for pais in paises:
+            # Si existe el continente agrego el pais a la misma lista
+            paises_por_continente.setdefault(pais["CONTINENTE"], []).append(pais)
+        # Recorro el diccionario mostrando los paises pertenecientes a cada continente
         for continente,paises in paises_por_continente.items():
-            print("\n"+"=" * 58)
-            print(f"✅ Pais/es del continente '{continente}' en el dataset ")
-            print("=" * 58)
+            print("\n"+"=" * 62)
+            print(f"✅ Paises del dataset dentro del continente '{continente}'")
+            print("=" * 62)
             for pais in paises:
-                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
-                print("=" * 58)
-            print(f"Total: {len(paises)}" )
-            print("=" * 58)
+                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]:,} \nSuperficie: {pais["SUPERFICIE"]:,}km² \nContinente: {pais["CONTINENTE"]}")
+                print("=" * 62)
+            print(f"Total: {len(paises)} pais/es" )
+            print("=" * 62)
         return
     
 
@@ -690,15 +690,15 @@ def programa_principal():
                     "7. Salir"]
     while True:
         # Mostramos las opciones del menu al usuario
-        print("\n"+"="*54)
+        print("\n"+"="*62)
         print("Bienvenido al menu de paises, elija una opción") 
-        print("="*54)
+        print("="*62)
         for opcion in menu_principal:
             print(opcion)
-        print("="*54)
+        print("="*62)
         # Pedimos al usuario que seleccione una de las opciones
         seleccion = input("Opción seleccionada: ").strip()
-        print("="*54)
+        print("="*62)
         match seleccion:
             case "1":
                 # Agregar un país con todos los datos necesarios para almacenarse 
