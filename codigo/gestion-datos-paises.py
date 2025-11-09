@@ -649,27 +649,27 @@ def programa_principal():
         return
     
     
-    # # Defino metodo para contar la cantidad de paises por continente
-    # def CantPaisesContinente():
-    #     paises = ObtenerPaises()
-    #     if not paises:
-    #         print("\n ⚠️  No hay paises disponibles dentro del dataset.\n")
-    #         # Salimos de la función si no hay países
-    #         return
-    #     paises_por_continente = {}
-    #     for pais in paises:
-    #         if pais["CONTINENTE"] in paises_por_continente.keys():
-    #             print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
-    #             print("=" * 54)   
-    #     # Inicializo diccionario paises_por_continente, que va a contener los paises dentro de su continente
-    #     for continente in paises_por_continente:
-    #         print("\n"+"=" * 54)
-    #         print(f"✅ Paises dentro del continente '{continente}'")
-    #         print("=" * 54)
-    #         for pais in continente:
-    #             print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
-    #             print("=" * 54)
-    #     return
+    # Defino metodo para contar la cantidad de paises por continente
+    def CantPaisesContinente():
+        paises = ObtenerPaises()
+        if not paises:
+            print("\n ⚠️  No hay paises disponibles dentro del dataset.\n")
+            # Salimos de la función si no hay países
+            return
+        paises_por_continente = {}
+        for pais in paises:
+            if pais["CONTINENTE"] in paises_por_continente.keys():
+                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
+                print("=" * 54)   
+        # Inicializo diccionario paises_por_continente, que va a contener los paises dentro de su continente
+        for continente in paises_por_continente:
+            print("\n"+"=" * 54)
+            print(f"✅ Paises dentro del continente '{continente}'")
+            print("=" * 54)
+            for pais in continente:
+                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
+                print("=" * 54)
+        return
     
 
 
