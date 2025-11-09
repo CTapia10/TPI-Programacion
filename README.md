@@ -193,6 +193,29 @@ Opción seleccionada: 9
 ```
 ---
 
+## Diagrama de Estructura Modular
+
+```mermaid
+graph TD
+    subgraph A[PROGRAMA PRINCIPAL]
+        P(programa_principal: Muestra el Menú)
+    end
+    P --> L1
+    P --> L2
+    P --> L3
+    L1 --> U1
+    L1 --> D1
+    L1 --> D2
+    L2 --> U1
+    L2 --> D1
+    L2 --> D2
+    L3 --> D1
+    L3 --> U1
+    D1 -.-> CSV[Archivo dataset.csv]
+    D2 -.-> CSV
+
+---
+
 <p align="center">
   <img src="https://capsule-render.vercel.app/api?type=waving&color=0:FFD43B,100:306998&height=120&section=footer"/>
 </p>
