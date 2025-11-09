@@ -197,22 +197,51 @@ Opción seleccionada: 9
 
 ```mermaid
 graph TD
-    subgraph A[PROGRAMA PRINCIPAL]
-        P(programa_principal: Muestra el Menú)
-    end
-    P --> L1
-    P --> L2
-    P --> L3
-    L1 --> U1
-    L1 --> D1
-    L1 --> D2
-    L2 --> U1
-    L2 --> D1
-    L2 --> D2
-    L3 --> D1
-    L3 --> U1
-    D1 -.-> CSV[Archivo dataset.csv]
-    D2 -.-> CSV
+    A["Inicio:<br>Ejecutar programa_principal()"] --> B{"Mostrar Menú Principal"};
+    
+    B -->|1. Agregar País| C["Llamar a AgregarPais()"];
+    C --> B;
+
+    B -->|2. Actualizar País| D["Llamar a ActualizarDatos()"];
+    D --> B;
+
+    B -->|3. Buscar País| E["Llamar a BuscarPais()"];
+    E --> B;
+
+    B -->|4. Filtrar Países| F{"Llamar a FiltrarPaises() /<br>Mostrar Submenú Filtro"};
+    F -->|1. Continente| F1["Llamar a FiltrarContinentes()"];
+    F1 --> F;
+    F -->|2. Rango Población| F2["Llamar a<br>FiltrarRangoPoblacion()"];
+    F2 --> F;
+    F -->|3. Rango Superficie| F3["Llamar a<br>FiltrarRangoSuperficie()"];
+    F3 --> F;
+    F -->|4. Volver| B;
+
+    B -->|5. Ordenar Países| G{"Llamar a OrdenarPaises() /<br>Mostrar Submenú Orden"};
+    G -->|1. Nombre| G1["Llamar a OrdenarPorNombre()"];
+    G1 --> G;
+    G -->|2. Población| G2["Llamar a OrdenarPorPoblacion()"];
+    G2 --> G;
+    G -->|3. Superficie| G3["Llamar a OrdenarPorSuperficie()"];
+    G3 --> G;
+    G -->|4. Volver| B;
+
+    B -->|6. Mostrar Estadísticas| H{"Llamar a MostrarEstadisticas() /<br>Mostrar Submenú Estadísticas"};
+    H -->|1. Max/Min Población| H1["Llamar a<br>PaisMaxMinPoblacion()"];
+    H1 --> H;
+    H -->|2. Promedio Población| H2["Llamar a PromedioPoblacion()"];
+    H2 --> H;
+    H -->|3. Promedio Superficie| H3["Llamar a PromedioSuperficie()"];
+    H3 --> H;
+    H -->|4. Cant. por Continente| H4["Llamar a<br>CantPaisesContinente()"];
+    H4 --> H;
+    H -->|5. Volver| B;
+
+    B -->|7. Salir| I["Imprimir &quot;¡Hasta luego!&quot; /<br>break"];
+    I --> J["Fin del Programa"];
+
+    B -->|Opción Inválida| K["Mostrar Error"];
+    K --> B;
  ```
 ---
 
