@@ -1,9 +1,38 @@
-# Gestión de Datos de Países - TPI Programación 1
-**UTN - Tecnicatura Universitaria en Programación a Distancia**
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:306998,100:FFD43B&height=180&section=header&text=Gestión%20de%20Datos%20de%20Países🐍&fontSize=40&fontColor=ffffff&animation=fadeIn&fontAlignY=35" />
+</p>
 
-**Materia:** Programación 1
+---
 
-## Descripción del programa
+# 📘 TPI - Programación 1 - UTN
+
+![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)  
+![Estado](https://img.shields.io/badge/Estado-En%20Progreso-yellow)  
+![GitHub repo size](https://img.shields.io/github/repo-size/CTapia10/TPI-Programacion)
+
+---
+
+## 👨‍💻 Autores
+- **Nombre:** Daniela Velazquez y Cristian Tapia 
+- **Comisión:** 12 y 13  
+- **Materia:** Programación 1
+- **Profesor:** Ariel Enferrel
+- **Tutores:** Franco Gonzalez y Miguel Barrera
+- **Universidad:** Universidad Nacional Tecnológica  
+
+---
+
+## 📂 Estructura del repositorio
+📦 TPI-Programacion  
+ ┣ ...  
+ ┣📜 README.md  
+ ┣📂 codigo  
+   ┗📜 gestion-datos-paises.py  
+   ┗📜 dataset.csv  
+ 
+---
+
+## 📚 Descripción del programa
 
 Este proyecto es el Trabajo Práctico Integrador (TPI) de la materia, diseñado para aplicar y consolidar los conceptos fundamentales de la programación aprendidos en la cursada, como listas, diccionarios, funciones y estructuras de control.
 
@@ -39,7 +68,9 @@ El programa ofrece un menú interactivo con las siguientes funcionalidades, cump
 
 El script también incluye validaciones de entrada para prevenir errores y mostrar mensajes claros al usuario, conforme a los requisitos de la consigna.
 
-## Instrucciones de uso
+---
+
+## 📌 Instrucciones de uso
 
 ### Requisitos previos
 
@@ -71,10 +102,10 @@ El script también incluye validaciones de entrada para prevenir errores y mostr
     ```
 
 4.  Una vez ejecutado, verás el menú principal en la consola y podrás comenzar a interactuar con el programa ingresando el número de la opción deseada.
-
-## Ejemplos de entradas y salidas
-
 ---
+
+## 🎯 Ejemplos de entradas y salidas
+
 **Menú Principal**
 
 Al iniciar el programa, se muestra el menú principal:
@@ -162,7 +193,6 @@ Opción seleccionada: 9
 ```
 ---
 
-## Participación de los integrantes
-
-* **Daniela Velazquez**
-* **Cristian Tapia**
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:FFD43B,100:306998&height=120&section=footer"/>
+</p>
