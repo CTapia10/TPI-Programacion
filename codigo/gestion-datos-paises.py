@@ -658,17 +658,20 @@ def programa_principal():
             return
         paises_por_continente = {}
         for pais in paises:
-            if pais["CONTINENTE"] in paises_por_continente.keys():
-                print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
-                print("=" * 54)   
+            if pais["CONTINENTE"] in paises_por_continente:
+                paises_por_continente[pais["CONTINENTE"]].append(pais)
+            else:
+                paises_por_continente[pais["CONTINENTE"]] = [pais]
         # Inicializo diccionario paises_por_continente, que va a contener los paises dentro de su continente
-        for continente in paises_por_continente:
-            print("\n"+"=" * 54)
-            print(f"✅ Paises dentro del continente '{continente}'")
-            print("=" * 54)
-            for pais in continente:
+        for continente,paises in paises_por_continente.items():
+            print("\n"+"=" * 58)
+            print(f"✅ Pais/es del continente '{continente}' en el dataset ")
+            print("=" * 58)
+            for pais in paises:
                 print(f"Pais: {pais["NOMBRE"]} \nPoblacion: {pais["POBLACION"]} \nSuperficie: {pais["SUPERFICIE"]}km² \nContinente: {pais["CONTINENTE"]}")
-                print("=" * 54)
+                print("=" * 58)
+            print(f"Total: {len(paises)}" )
+            print("=" * 58)
         return
     
 
@@ -738,4 +741,4 @@ def programa_principal():
 #                              Ejecuto el programa principal                              #
 #=========================================================================================#
 programa_principal()
-#=========================================================================================#
+#=========================================================================================# 
