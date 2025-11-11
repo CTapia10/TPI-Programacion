@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Presentación TPI - Programación I</title>
+    <!-- Incluimos Tailwind CSS para un diseño rápido y moderno -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Estilo inspirado en el PDF "Proyecto-Integrador-Programacion.pdf" */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .slide {
+            /* Transición de opacidad para el cambio de diapositiva */
+            transition: opacity 0.5s ease-in-out;
+        }
+        .active-slide {
+            opacity: 1;
+            z-index: 10; /* Asegura que la diapositiva activa esté al frente */
+        }
+        .inactive-slide {
+            opacity: 0;
+            z-index: 0; /* Envía las inactivas al fondo */
+        }
+        /* Estilo para los bloques de código de la demo, como se pidió */
+        .demo-code {
+            background-color: #f3f4f6; /* Fondo claro (gray-100) */
+            color: #111827; /* Texto oscuro (gray-900) */
+            font-family: 'Courier New', Courier, monospace;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-size: 1.125rem; /* Letra grande (text-lg) */
+            line-height: 1.75rem;
+            overflow-x: auto; /* Scroll horizontal si es necesario */
+            white-space: pre; /* Mantiene el formato del texto */
+        }
+    </style>
+    <!-- Importamos la fuente Inter de Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-white flex flex-col items-center justify-center min-h-screen p-4 overflow-hidden">
+
+    <!-- Contenedor principal de la presentación -->
+    <div id="presentation-container" class="w-full max-w-5xl h-[650px] bg-gray-800 rounded-lg shadow-2xl overflow-hidden relative border-4 border-cyan-500/50">
+
+        <!-- Diapositiva 1: Portada e Introducción (Punto 1) -->
+        <section id="slide-1" class="slide inactive-slide absolute top-0 left-0 w-full h-full p-12 sm:p-16 flex flex-col justify-center items-center text-center">
+            <img src="https://placehold.co/200x70/FFFFFF/003A70?text=UTN" alt="Logo UTN" class="mb-8 rounded">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-cyan-300">Trabajo Práctico Integrador</h1>
+            <h2 class="text-3xl md:text-4xl font-semibold text-yellow-300">Programación I</h2>
+            <p class="text-2xl mt-8">Sistema de Gestión de Información sobre Países</p>
+            <p class="text-lg mt-4 max-w-2xl">
+                Un proyecto para aplicar listas, diccionarios, modularización y manejo de archivos CSV en una aplicación de consola funcional.
+            </p>
+        </section>
+
+        <!-- Diapositiva 2: El Equipo (Punto 2) -->
+        <section id="slide-2" class="slide inactive-slide absolute top-0 left-0 w-full h-full p-12 sm:p-16 flex flex-col justify-center">
+            <h1 class="text-4xl font-bold mb-8 text-cyan-300">Presentación del Equipo</h1>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 text-lg">
+                <div>
+                    <h2 class="text-2xl font-semibold mb-4 text-yellow-300">Alumnos</h2>
+                    <ul class="list-disc list-inside space-y-2 text-xl">
+                        <li>Cristian Alejandro Tapia (c13)</li>
+                        <li>Daniela Velazquez (c12)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-semibold mb-4 text-yellow-300">Cátedra</h2>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><span class="font-semibold">Coordinador:</span> Alberto Cortez</li>
+                        <li><span class="font-semibold">Profesores:</span> Cinthia Rigoni, Sebastian Bruselario, Ariel Enferrel</li>
+                        <li><span class="font-semibold">Tutores:</span> Franco Gonzalez, Miguel Barrera</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Diapositiva 3: ¿Qué hace el Proyecto? (Punto 3 - Parte 1) -->
+        <section id="slide-3" class="slide inactive-slide absolute top-0 left-0 w-full h-full p-12 sm:p-16 flex flex-col justify-center">
+            <h1 class="text-4xl font-bold mb-8 text-cyan-300">Explicación del Proyecto</h1>
+            <h2 class="text-2xl font-semibold mb-6 text-yellow-300">¿Qué hace el sistema?</h2>
+            
+            <p class="text-lg mb-6 max-w-3xl">
+                Es una aplicación de consola en <strong class="text-yellow-300">Python 3.10+</strong> que gestiona un dataset de países desde un archivo <strong class="text-yellow-300">.csv</strong>. Permite al usuario interactuar con los datos a través de un menú.
+            </p>
+
+            <h3 class="text-xl font-semibold mb-4 text-yellow-300">Funcionalidades Clave</h3>
+            <ul class="list-disc list-inside space-y-3 text-lg">
+                <li><strong class="text-cyan-200">Gestión de Datos:</strong> Agregar nuevos países y Actualizar población/superficie de existentes.</li>
+                <li><strong class="text-cyan-200">Consultas:</strong> Buscar países por nombre (coincidencia parcial o exacta).</li>
+                <li><strong class="text-cyan-200">Filtros:</strong> Por Continente, Rango de Población y Rango de Superficie.</li>
+                <li><strong class="text-cyan-200">Ordenamiento:</strong> Por Nombre, Población o Superficie (ascendente o descendente).</li>
+                <li><strong class="text-cyan-200">Estadísticas:</strong> Calcular promedios, max/min y cantidad de países por continente.</li>
+            </ul>
+        </section>
+
+        <!-- Diapositiva 4: Arquitectura del Código (Punto 3 - Parte 2) -->
+        <section id="slide-4" class="slide inactive-slide absolute top-0 left-0 w-full h-full p-12 sm:p-16 flex flex-col justify-center">
+            <h1 class="text-4xl font-bold mb-8 text-cyan-300">Explicación del Código: Arquitectura</h1>
+            <p class="text-lg mb-6">El código se organizó en "capas" de funciones para ser más ordenado y fácil de mantener.</p>
+            
+            <div class="space-y-6">
+                <!-- Capa 1: Motor Principal -->
+                <div>
+                    <h2 class="text-2xl font-semibold text-yellow-300">1. Motor Principal (`programa_principal`)</h2>
+                    <p class="text-lg ml-4">Es el "cerebro" de la app. Muestra el menú principal y usa <code class="bg-gray-700 px-2 py-1 rounded">match-case</code> para decidir qué función llamar según la opción del usuario.</p>
+                </div>
+                
+                <!-- Capa 2: Lógica de Negocio -->
+                <div>
+                    <h2 class="text-2xl font-semibold text-yellow-300">2. Lógica de Negocio (Ej: `AgregarPais`, `FiltrarPaises`)</h2>
+                    <p class="text-lg ml-4">Contiene las reglas del sistema. Estas funciones saben *qué hacer* con los datos (cómo agregar, cómo filtrar, cómo ordenar).</p>
+                </div>
+
+                <!-- Capa 3: Datos y Utilidades -->
+                <div>
+                    <h2 class="text-2xl font-semibold text-yellow-300">3. Datos y Utilidades (Ej: `ObtenerPaises`, `PedirNombre`)</h2>
+                    <p class="text-lg ml-4"><strong class="text-cyan-200">Funciones de Datos:</strong> (`ObtenerPaises`, `PersistirCsv`) Son las únicas que saben leer y escribir en el archivo <code class="bg-gray-700 px-2 py-1 rounded">.csv</code>.</p>
+                    <p class="text-lg ml-4 mt-2"><strong class="text-cyan-200">Funciones de Utilidad:</strong> (`PedirNombre`, `PedirCantidad`) Validan la entrada del usuario. Se aseguran de que no se ingresen letras en números o campos vacíos.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Diapositiva 5: Demostración (Punto 4) -->
+        <section id="slide-5" class="slide inactive-slide absolute top-0 left-0 w-full h-full p-12 sm:p-16 flex flex-col justify-center">
+            <h1 class="text-4xl font-bold mb-6 text-cyan-300">Demostración del Proyecto</h1>
+            <p class="text-lg mb-6">Esta es la diapositiva de apoyo para la demostración en vivo. (Cumpliendo con "fondo claro y letra grande").</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                    <h2 class="text-xl font-semibold text-yellow-300 mb-2">Menú Principal</h2>
+                    <pre class="demo-code text-sm sm:text-base">==============================================================
+Bienvenido al menu de paises, elija una opción
+==============================================================
+1. Agregar pais
+2. Actualizar poblacion y superficie de un pais
+3. Buscar un pais
+4. Filtrar paises
+5. Ordenar paises
+6. Mostrar estadisticas
+7. Salir
+==============================================================
+Opción seleccionada: </pre>
+                </div>
+                <div>
+                    <h2 class="text-xl font-semibold text-yellow-300 mb-2">Ejemplo: Buscar (Opción 3)</h2>
+                    <pre class="demo-code text-sm sm:text-base">Opción seleccionada: 3
+==============================================================
+
+Ingrese el nombre: arg
+==============================================================
+ Paises que coinciden con 'arg':
+==============================================================
+Pais: Argentina
+Poblacion: 46,000,000
+Superficie: 2,780,400km²
+Continente: America del Sur
+==============================================================</pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- Diapositiva 6: Reflexión: Marco Teórico (Punto 5) -->
+        <section id="slide-6" class="slide inactive-slide absolute top-0 left-0 w-full h-full p-12 sm:p-16 flex flex-col justify-center">
+            <h1 class="text-4xl font-bold mb-8 text-cyan-300">Reflexión: Marco Teórico Aplicado</h1>
+            
+            <div>
+                <h2 class="text-2xl font-semibold text-yellow-300 mb-4">Estructuras de Datos Fundamentales</h2>
+                <ul class="list-disc list-inside space-y-2 text-lg">
+                    <li><strong class="text-cyan-200">Diccionarios:</strong> Usados para modelar cada país. Permite un acceso semántico a los datos (ej: `pais["POBLACION"]`).</li>
+                    <li><strong class="text-cyan-200">Listas:</strong> Usadas para almacenar el dataset completo. Fue la estructura central que contiene la "lista de diccionarios".</li>
+                </ul>
+            </div>
+
+            <div class="mt-8">
+                <h2 class="text-2xl font-semibold text-yellow-300 mb-4">Técnicas Clave de Programación</h2>
+                <ul class="list-disc list-inside space-y-2 text-lg">
+                    <li><strong class="text-cyan-200">`sorted(..., key=...)`</strong>: Esencial para ordenar la lista de diccionarios usando un valor interno (como población o nombre).</li>
+                    <li><strong class="text-cyan-200">`max(..., key=...)` y `min(..., key=...)`</strong>: Permitieron encontrar el país (el diccionario entero) con la mayor o menor población.</li>
+                    <li><strong class="text-cyan-200">`diccionario.setdefault()`</strong>: Técnica muy eficiente usada para agrupar países por continente en las estadísticas.</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Diapositiva 7: Conclusión (Punto 5) -->
+        <section id="slide-7" class="slide inactive-slide absolute top-0 left-0 w-full h-full p-12 sm:p-16 flex flex-col justify-center">
+            <h1 class="text-4xl font-bold mb-8 text-cyan-300">Conclusión y Aprendizajes</h1>
+            
+            <ul class="list-disc list-inside space-y-4 text-xl">
+                <li>
+                    <strong class="text-yellow-300">La Modularización fue Esencial:</strong> Dividir el código en funciones con una sola responsabilidad (como `PedirNombre`, `PersistirCsv`) fue el aprendizaje más importante. Hizo que probar y corregir errores fuera muchísimo más simple.
+                </li>
+                <li>
+                    <strong class="text-yellow-300">Listas de Diccionarios:</strong> Esta combinación demostró ser increíblemente versátil y potente para manejar datos estructurados en Python.
+                </li>
+                <li>
+                    <strong class="text-yellow-300">Validación de Entradas:</strong> Separar la validación en funciones "ayudantes" (Utilities) es clave para crear un programa robusto que no falle con entradas incorrectas.
+                </li>
+                <li>
+                    <strong class="text-yellow-300">Trabajo en Equipo:</strong> El uso de Git y una comunicación clara fue fundamental para integrar el trabajo de ambos y gestionar las versiones del código.
+                </li>
+            </ul>
+        </section>
+
+        <!-- Diapositiva 8: Cierre -->
+        <section id="slide-8" class="slide inactive-slide absolute top-0 left-0 w-full h-full p-12 sm:p-16 flex flex-col justify-center items-center text-center">
+            <h1 class="text-5xl font-bold mb-8 text-cyan-300">¡Muchas Gracias!</h1>
+            <h2 class="text-3xl font-semibold text-yellow-300">TPI - Programación I</h2>
+            
+            <p class="text-xl mt-12">Repositorio del Proyecto:</p>
+            <a href="https://github.com/CTapia10/TPI-Programacion" target="_blank" class="text-lg bg-gray-700 px-4 py-2 rounded-lg mt-2 hover:bg-cyan-500 transition-colors">
+                github.com/CTapia10/TPI-Programacion
+            </a>
+        </section>
+        
+    </div>
+
+    <!-- Controles de Navegación -->
+    <div class="flex justify-between w-full max-w-5xl mt-4">
+        <button id="prev-btn" class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-6 rounded-lg shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+            Anterior
+        </button>
+        <div id="slide-counter" class="text-lg font-semibold flex items-center justify-center">
+            Diapositiva 1 / 8
+        </div>
+        <button id="next-btn" class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-6 rounded-lg shadow-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed">
+            Siguiente
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Seleccionamos todos los elementos que son diapositivas
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const slideCounter = document.getElementById('slide-counter');
+            
+            let currentSlide = 0;
+            const totalSlides = slides.length;
+
+            // Función para mostrar la diapositiva correcta
+            function showSlide(index) {
+                // Oculta todas las diapositivas
+                slides.forEach((slide, i) => {
+                    slide.classList.remove('active-slide');
+                    slide.classList.add('inactive-slide');
+                });
+
+                // Muestra solo la diapositiva actual
+                slides[index].classList.remove('inactive-slide');
+                slides[index].classList.add('active-slide');
+
+                // Actualiza el contador
+                slideCounter.textContent = `Diapositiva ${index + 1} / ${totalSlides}`;
+
+                // Habilita o deshabilita los botones de navegación
+                prevBtn.disabled = (index === 0);
+                nextBtn.disabled = (index === totalSlides - 1);
+            }
+
+            // Event listener para el botón "Siguiente"
+            nextBtn.addEventListener('click', () => {
+                if (currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                }
+            });
+
+            // Event listener para el botón "Anterior"
+            prevBtn.addEventListener('click', () => {
+                if (currentSlide > 0) {
+                    currentSlide--;
+                    showSlide(currentSlide);
+                }
+            });
+
+            // Event listener para las teclas de flecha
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight' && currentSlide < totalSlides - 1) {
+                    currentSlide++;
+                    showSlide(currentSlide);
+                } else if (e.key === 'ArrowLeft' && currentSlide > 0) {
+                    currentSlide--;
+                    showSlide(currentSlide);
+                }
+            });
+
+            // Muestra la primera diapositiva al cargar la página
+            showSlide(currentSlide);
+        });
+    </script>
+
+</body>
+</html>
