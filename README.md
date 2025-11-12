@@ -8,7 +8,9 @@
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue?logo=python&logoColor=white)  
 ![Estado](https://img.shields.io/badge/Estado-En%20Progreso-yellow)  
-![GitHub repo size](https://img.shields.io/github/repo-size/CTapia10/TPI-Programacion)
+![GitHub repo size](https://img.shields.io/github/repo-size/CTapia10/TPI-Programacion)  
+Link repositorio: https://github.com/CTapia10/TPI-Programacion/tree/main
+Link video: https://drive.google.com/drive/folders/1Ca1RUebSUjKXCJhZmg8_9_Zq3kN0tgIo
 
 ---
 
